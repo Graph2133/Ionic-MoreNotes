@@ -1,0 +1,19 @@
+page-home {
+    ion-content {
+        background: url(../assets/imgs/sky3.jpeg) no-repeat fixed center;
+        background-size: cover;
+        &:before {
+            content: '';
+            position:absolute;
+            background-image: linear-gradient(to bottom right, green,blue);
+            opacity: .3;
+        }
+    }
+
+    .date {
+        color:gray;
+        padding-right:24px;
+        font-size: 12px;
+    }
+
+}

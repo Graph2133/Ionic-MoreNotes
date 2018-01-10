@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Note Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-card *ngIf="updateStatus">
+    <ion-card-content>
+      <ion-card-title>
+        {{note.title}}
+      </ion-card-title>
+      <div class="note-date">{{note.date}}</div>
+      <hr>
+      <p>{{note.content}}</p>
+    </ion-card-content>
+    <ion-item>
+      <button block ion-button color="danger" (click)="deleteNode(note.createDate)" item-right>Delete Note</button>
+    </ion-item>
+    <ion-item>
+      <button block ion-button color="warning" (click)="startUpdate()" item-right>Update Note</button>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngIf="!updateStatus">
+
+    <form [formGroup]="formGroup" (ngSubmit)="updateNote(formGroup.value)">
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" formControlName="date">
+        </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Title</ion-label>
+        <ion-input type="text" name="title" formControlName="title" required></ion-input>
+        <div class="alert" *ngIf="!formGroup.controls['title'].valid && !formGroup.controls['title'].touched">
+          {{titleAlert}}
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label>Note</ion-label>
+        <ion-input type="text" name="content" formControlName="content" required></ion-input>
+        <div class="alert" *ngIf="!formGroup.controls['content'].valid && !formGroup.controls['content'].touched">
+          {{titleAlert}}
+        </div>
+      </ion-item>
+      <button ion-button color="secondary" type="submit" [disabled]=!formGroup.valid>Save Changes</button>
+      <button ion-button type="button" (click)="declineUpdate()">Back To Note</button>
+    </form>
+
+  </ion-card>
+</ion-content>
